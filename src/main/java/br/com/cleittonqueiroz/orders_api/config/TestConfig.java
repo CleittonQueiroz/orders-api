@@ -1,8 +1,10 @@
 package br.com.cleittonqueiroz.orders_api.config;
 
+import br.com.cleittonqueiroz.orders_api.entities.Category;
 import br.com.cleittonqueiroz.orders_api.entities.Order;
 import br.com.cleittonqueiroz.orders_api.entities.User;
 import br.com.cleittonqueiroz.orders_api.entities.enums.OrderStatus;
+import br.com.cleittonqueiroz.orders_api.repositories.CategoryRepository;
 import br.com.cleittonqueiroz.orders_api.repositories.OrderRepository;
 import br.com.cleittonqueiroz.orders_api.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,8 +26,18 @@ public class TestConfig implements CommandLineRunner {
     @Autowired
     private OrderRepository orderRepository;
 
+    @Autowired
+    private CategoryRepository categoryRepository;
+
+
     @Override
     public void run (String... args) throws Exception{
+
+        Category cat1 = new Category(null, "Electronics");
+        Category cat2 = new Category(null, "Books");
+        Category cat3 = new Category(null, "Computers");
+
+        categoryRepository.saveAll(Arrays.asList(cat1, cat2, cat3));
 
         User u1 = new User(null, "Cleiton Queiroz", "Cleiton@gmail.com", "988888888", "123456");
         User u2 = new User(null, "Cristina Queiroz", "Cristina@gmail.com", "977777777", "123456");
